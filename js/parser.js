@@ -2,15 +2,37 @@ import { uid } from './uid.js';
 import { nextColor } from './colors.js';
 
 export function parseLog(text, fileName) {
-  const sections = splitSections(text);
+  let sandboxSection = '';
+  let activitySection = '';
+  let tradeSection = '';
 
-  const sandboxText = sections['Sandbox logs'] ?? '';
-  const activityText = sections['Activities log'] ?? '';
-  const tradeText = sections['Trade History'] ?? '';
+  const trimmed = text.trim();
+  if (trimmed.startsWith('{')) {
+    try {
+      const obj = JSON.parse(trimmed);
+      activitySection = obj.activitiesLog ?? obj.activityLog ?? '';
+      sandboxSection = obj.logs ?? obj.sandboxLog ?? obj.sandboxLogs ?? '';
+      tradeSection = obj.tradeHistory ?? obj.trades ?? '';
+    } catch (e) {
+      console.warn('Failed to parse log as JSON', e);
+    }
+  }
 
-  const { sandboxLogs, algorithmLogs, traderDataLogs } = parseSandbox(sandboxText);
-  const activityRows = parseCsv(activityText);
-  const tradeRows = parseCsv(tradeText);
+  if (!activitySection) {
+    const sections = splitSections(text);
+    sandboxSection = sections['Sandbox logs'] ?? '';
+    activitySection = sections['Activities log'] ?? '';
+    tradeSection = sections['Trade History'] ?? '';
+  }
+
+  // Fallback: if no sections found but text looks like activities CSV
+  if (!activitySection && (text.includes('day;') || text.includes('day,'))) {
+    activitySection = text;
+  }
+
+  const { sandboxLogs, algorithmLogs, traderDataLogs } = parseSandbox(sandboxSection);
+  const activityRows = Array.isArray(activitySection) ? activitySection : parseCsv(activitySection);
+  const tradeRows = Array.isArray(tradeSection) ? tradeSection : parseCsv(tradeSection);
 
   // Build tick map: `${day}:${ts}` -> tick object
   const tickMap = new Map();
@@ -123,44 +145,60 @@ function splitSections(text) {
   return result;
 }
 
-function parseSandbox(text) {
+function parseSandbox(input) {
   const sandboxLogs = [], algorithmLogs = [], traderDataLogs = [];
-  if (!text) return { sandboxLogs, algorithmLogs, traderDataLogs };
+  if (!input) return { sandboxLogs, algorithmLogs, traderDataLogs };
 
-  for (const line of text.split('\n')) {
-    const t = line.trim();
+  const lines = Array.isArray(input) ? input : input.split('\n');
+
+  for (const line of lines) {
+    const t = typeof line === 'string' ? line.trim() : line;
     if (!t) continue;
-    if (t.startsWith('{')) {
-      try {
-        const obj = JSON.parse(t);
-        if (obj.lambdaLog != null) {
-          try {
-            const decoded = atob(obj.lambdaLog);
-            sandboxLogs.push({ timestamp: obj.timestamp ?? 0, day: obj.day ?? 0, logs: decoded });
-            decoded.split('\n').filter(Boolean).forEach(l => algorithmLogs.push(l));
-          } catch {
-            sandboxLogs.push({ raw: t });
-          }
-        } else if (obj.traderData != null) {
-          traderDataLogs.push({ timestamp: obj.timestamp ?? 0, data: obj.traderData });
-          sandboxLogs.push({ raw: t });
-        } else {
-          sandboxLogs.push({ raw: t });
-        }
-        continue;
-      } catch { /* not JSON */ }
+
+    let obj = null;
+    if (typeof t === 'object' && t !== null) {
+      obj = t;
+    } else if (typeof t === 'string' && t.startsWith('{')) {
+      try { obj = JSON.parse(t); } catch { /* not JSON */ }
     }
-    sandboxLogs.push({ raw: t });
-    algorithmLogs.push(t);
+
+    if (obj) {
+      if (obj.lambdaLog != null) {
+        try {
+          const decoded = atob(obj.lambdaLog);
+          sandboxLogs.push({ timestamp: obj.timestamp ?? 0, day: obj.day ?? 0, logs: decoded });
+          decoded.split('\n').filter(Boolean).forEach(l => algorithmLogs.push(l));
+        } catch {
+          sandboxLogs.push({ raw: typeof t === 'string' ? t : JSON.stringify(t) });
+        }
+      } else if (obj.traderData != null) {
+        traderDataLogs.push({ timestamp: obj.timestamp ?? 0, data: obj.traderData });
+        sandboxLogs.push({ raw: typeof t === 'string' ? t : JSON.stringify(t) });
+      } else {
+        if (obj.sandboxLog) algorithmLogs.push(obj.sandboxLog);
+        sandboxLogs.push({ raw: typeof t === 'string' ? t : JSON.stringify(t) });
+      }
+      continue;
+    }
+
+    if (typeof t === 'string') {
+      sandboxLogs.push({ raw: t });
+      algorithmLogs.push(t);
+    }
   }
 
   return { sandboxLogs, algorithmLogs, traderDataLogs };
 }
 
-function parseCsv(text, sep = ';') {
-  if (!text) return [];
+function parseCsv(text) {
+  if (!text || typeof text !== 'string') return [];
   const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
   if (lines.length < 2) return [];
+
+  // Detect separator
+  let sep = ';';
+  if (lines[0].includes(',') && !lines[0].includes(';')) sep = ',';
+
   const headers = lines[0].split(sep).map(h => h.trim());
   return lines.slice(1).map(line => {
     const vals = line.split(sep);

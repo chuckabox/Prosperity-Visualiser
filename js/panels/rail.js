@@ -19,7 +19,7 @@ export function initRail(container) {
         </svg>
         <p>Drop .log files</p>
         <p class="drop-hint">or click to browse</p>
-        <input type="file" id="file-input" accept=".log" multiple style="display:none">
+        <input type="file" id="file-input" accept=".log,.json" multiple style="display:none">
       </div>
       <div id="strategy-list" class="strategy-list"></div>
       <div class="rail-footer">
@@ -106,7 +106,8 @@ export function initRail(container) {
 
 async function loadFiles(files) {
   for (const file of files) {
-    if (!file.name.endsWith('.log')) continue;
+    const name = file.name.toLowerCase();
+    if (!name.endsWith('.log') && !name.endsWith('.json')) continue;
     store.setLoading(true);
     try {
       const text = await file.text();
