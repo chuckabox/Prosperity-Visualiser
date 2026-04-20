@@ -21,6 +21,11 @@
   --top-bar-h: 64px;
   --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   --blur: blur(12px);
+  /* Product Colors */
+  --color-osmium: #60a5fa;
+  --color-pepper: #f87171;
+  --color-chilli: #fbbf24;
+  --color-cacao: #8b5cf6;
 }
 
 [data-theme="light"] {
