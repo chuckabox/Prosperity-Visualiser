@@ -112,7 +112,11 @@ html, body {
   border-bottom: 1px solid var(--border);
 }
 
-.rail-title { font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); }
+.rail-title { 
+  font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); 
+  transition: color 0.15s;
+}
+.rail-title:hover { color: var(--accent); }
 
 .drop-zone {
   margin: 10px;
