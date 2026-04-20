@@ -490,9 +490,10 @@ kbd { background: var(--bg-tertiary); border: 1px solid var(--border); border-ra
   width: 36px; height: 36px; border: 3px solid var(--border);
   border-top-color: var(--accent); border-radius: 50;
   border-radius: 50%;
-  animation: spin 0.7s linear infinite;
+  animation: spin 0.7s linear infinite, pulse 1.5s ease-in-out infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
 
 /* ===== Scrollbar ===== */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
