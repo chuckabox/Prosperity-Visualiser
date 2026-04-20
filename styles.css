@@ -33,7 +33,16 @@
 
 /* ===== Reset ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; overflow: hidden; font-family: system-ui, -apple-system, sans-serif; font-size: 13px; background: var(--bg-primary); color: var(--text-primary); }
+html, body { 
+  height: 100%; 
+  overflow: hidden; 
+  font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+  font-size: 13.5px; 
+  line-height: 1.5;
+  background: var(--bg-primary); 
+  color: var(--text-primary); 
+  -webkit-font-smoothing: antialiased;
+}
 
 /* ===== App Layout ===== */
 #app {
