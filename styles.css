@@ -202,6 +202,23 @@ html, body {
   accent-color: var(--accent);
   cursor: pointer;
 }
+.scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  cursor: pointer;
+  margin-top: -5px;
+}
+.scrubber::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: var(--bg-tertiary);
+  border-radius: 2px;
+}
 
 .tb-tick-label { font-size: 11px; color: var(--text-muted); white-space: nowrap; min-width: 70px; }
 
