@@ -246,6 +246,7 @@ html, body {
   transition: background 0.15s, color 0.15s;
 }
 .btn-ghost:hover { background: var(--bg-hover); color: var(--text-primary); }
+.btn-ghost:active { transform: scale(0.95); }
 
 /* ===== Toggle ===== */
 .toggle-row {
