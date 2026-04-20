@@ -280,7 +280,8 @@ html, body {
   padding: 10px 16px;
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
-  background: rgba(255,255,255,0.01);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(4px);
 }
 
 .chart-title { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
