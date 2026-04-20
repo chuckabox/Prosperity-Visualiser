@@ -23,11 +23,11 @@ export function initRail(container) {
       </div>
       <div id="strategy-list" class="strategy-list"></div>
       <div class="rail-footer">
-        <label class="toggle-row" title="Persist parsed strategies to IndexedDB">
+        <label class="toggle-row" title="Save to IndexedDB">
           <input type="checkbox" id="idb-toggle">
-          <span>Save to browser</span>
+          <span>Persist</span>
         </label>
-        <button class="btn-ghost" id="about-trigger">About</button>
+        <button class="btn-ghost" id="clear-all" style="color:var(--neg)">Clear All</button>
       </div>
     </div>`;
 
@@ -95,9 +95,13 @@ export function initRail(container) {
   store.subscribe('activeIds', renderList);
   renderList();
 
-  // Wire about button
-  const aboutTrigger = container.querySelector('#about-trigger');
-  aboutTrigger?.addEventListener('click', openAbout);
+  // Clear all
+  container.querySelector('#clear-all').addEventListener('click', async () => {
+    if (!confirm('Clear all strategies?')) return;
+    store.clearAll();
+    localStorage.removeItem('op-idb'); // or keep it
+    // if (store.state.prefs.indexedDB) ... need clearDB
+  });
 }
 
 async function loadFiles(files) {

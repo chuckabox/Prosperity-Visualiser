@@ -48,6 +48,18 @@ export function removeStrategy(id) {
   _recalcMaxTick();
 }
 
+export function clearAll() {
+  _state.strategies.clear();
+  _state.activeIds.clear();
+  _state.selectedProduct = null;
+  _state.playback.tick = 0;
+  _state.playback.maxTick = 0;
+  emit('strategies', _state.strategies);
+  emit('tick', 0);
+  emit('maxTick', 0);
+  _recalcMaxTick();
+}
+
 export function toggleStrategy(id) {
   if (_state.activeIds.has(id)) _state.activeIds.delete(id);
   else _state.activeIds.add(id);
