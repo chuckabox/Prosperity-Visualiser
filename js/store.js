@@ -30,6 +30,7 @@ export function emit(key, data) {
 }
 
 export function addStrategy(strategy) {
+  if (_state.strategies.has(strategy.id)) return;
   _state.strategies.set(strategy.id, strategy);
   _state.activeIds.add(strategy.id);
   if (!_state.selectedProduct && strategy.products.length) {
