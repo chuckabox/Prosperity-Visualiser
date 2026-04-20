@@ -450,7 +450,7 @@ html, body {
 .summary-content { overflow: auto; flex: 1; }
 .summary-table { width: 100%; border-collapse: collapse; font-size: 12px; }
 .summary-table th { padding: 5px 10px; text-align: left; color: var(--text-muted); border-bottom: 1px solid var(--border); font-weight: 600; position: sticky; top: 0; background: var(--bg-secondary); }
-.summary-table td { padding: 5px 10px; border-bottom: 1px solid var(--border); transition: background 0.1s ease; }
+.summary-table td { padding: 5px 10px; border-bottom: 1px solid var(--border); transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
 .summary-table tr:hover td { background: var(--bg-hover); }
 
 /* ===== Colors ===== */
