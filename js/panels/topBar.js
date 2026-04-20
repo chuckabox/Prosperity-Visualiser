@@ -1,4 +1,5 @@
 import * as store from '../store.js';
+import { openAbout } from './about.js';
 
 let _raf = null;
 let _lastTime = null;
@@ -34,6 +35,7 @@ export function initTopBar(container) {
           <span>Diff</span>
         </label>
         <button class="tb-btn" id="tb-theme" title="Toggle theme">&#9790;</button>
+        <button class="tb-btn" id="tb-help" title="About / Specs">?</button>
       </div>
     </div>`;
 
@@ -46,6 +48,7 @@ export function initTopBar(container) {
   const normX = container.querySelector('#tb-norm-x');
   const diffCk = container.querySelector('#tb-diff');
   const themeBtn = container.querySelector('#tb-theme');
+  const helpBtn = container.querySelector('#tb-help');
 
   function updateScrubber() {
     const { tick, maxTick } = store.state.playback;
@@ -87,6 +90,7 @@ export function initTopBar(container) {
   themeBtn.addEventListener('click', () => {
     store.setTheme(store.state.theme === 'dark' ? 'light' : 'dark');
   });
+  helpBtn.addEventListener('click', () => openAbout());
 
   document.addEventListener('keydown', (e) => {
     const tag = document.activeElement?.tagName;
