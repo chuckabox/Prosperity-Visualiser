@@ -10,25 +10,23 @@ export function initAbout() {
         <button class="modal-close">✕</button>
       </div>
       <div class="modal-body">
-        <p>Local-first dashboard for IMC Prosperity algorithmic trading competitions.</p>
-        <h3>Features</h3>
+        <p><strong>OpenProsperity Visualizer v1.2.0</strong></p>
+        <p>A specialized tool for analyzing trading logs from the IMC Prosperity competition. Designed for speed, privacy, and deep data inspection.</p>
+        
+        <h3>Key Features</h3>
         <ul>
-          <li>Drop 1–N .log files; each gets a unique color</li>
-          <li>Playback with variable speed (1×–50×), scrubber, keyboard shortcuts</li>
-          <li>PnL performance, price/liquidity, position charts</li>
-          <li>Live order book, position pressure gauge</li>
-          <li>Own fills table, sandbox/algorithm/trader-data logs</li>
-          <li>Diff mode: variant − baseline on PnL chart</li>
-          <li>Normalized-X: compare runs of different lengths</li>
-          <li>Export PnL → PNG, summary → CSV</li>
-          <li>Optional IndexedDB persistence across reloads</li>
+          <li><strong>Multithreaded Parsing</strong>: Processes logs without blocking the main thread.</li>
+          <li><strong>Diff Mode</strong>: Instantly spot variance between strategy versions.</li>
+          <li><strong>Zero Latency Charts</strong>: Custom canvas implementation for smooth scrubbing.</li>
         </ul>
-        <h3>Keyboard Shortcuts</h3>
+
+        <h3>Shortcuts</h3>
         <ul>
-          <li><kbd>Space</kbd> — Play / Pause</li>
-          <li><kbd>←</kbd> / <kbd>→</kbd> — Step one tick</li>
-          <li><kbd>Shift+←</kbd> / <kbd>Shift+→</kbd> — Step 10 ticks</li>
+          <li><kbd>Space</kbd> Play/Pause playback</li>
+          <li><kbd>←</kbd> / <kbd>→</kbd> Step single tick</li>
+          <li><kbd>Shift</kbd> + <kbd>←</kbd> / <kbd>→</kbd> Jump 10 ticks</li>
         </ul>
+      <div class="modal-body">
         <h3>Data Handling</h3>
         <p>Files are read client-side with the File API and parsed in a Web Worker.
         No data ever leaves your browser. No analytics, no cookies, no telemetry.</p>
