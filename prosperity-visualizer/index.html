@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenProsperity Visualizer</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Left Rail -->
+    <div id="rail"></div>
+
+    <!-- Main Area -->
+    <div id="main">
+
+      <!-- Top Bar: Playback Controls -->
+      <div id="top-bar"></div>
+
+      <!-- Scrollable Content -->
+      <div id="content">
+
+        <!-- KPI Cards -->
+        <div id="kpi-row"></div>
+
+        <!-- Charts Row: PnL + Price -->
+        <div class="charts-row">
+          <div id="pnl-chart-wrap" style="height:100%"></div>
+          <div id="price-chart-wrap" style="height:100%"></div>
+        </div>
+
+        <!-- Position Chart -->
+        <div class="charts-row position-row">
+          <div id="position-chart-wrap" style="height:100%;grid-column:1/-1"></div>
+        </div>
+
+        <!-- Bottom Panels with Tabs -->
+        <div class="bottom-area">
+          <div class="bottom-tabs">
+            <button class="bottom-tab active" data-panel="main">Book &amp; Fills</button>
+            <button class="bottom-tab" data-panel="summary">Summary</button>
+            <button class="bottom-tab" data-panel="logs">Logs</button>
+          </div>
+          <div class="bottom-panels" style="height:260px">
+
+            <!-- Panel: Book + Pressure + Fills -->
+            <div id="panel-main" class="bottom-panel">
+              <div class="bottom-inner">
+                <div id="order-book-wrap"></div>
+                <div id="pressure-wrap"></div>
+                <div id="own-fills-wrap"></div>
+              </div>
+            </div>
+
+            <!-- Panel: Summary -->
+            <div id="panel-summary" class="bottom-panel hidden" style="padding-top:10px">
+              <div id="summary-wrap" style="height:100%"></div>
+            </div>
+
+            <!-- Panel: Logs -->
+            <div id="panel-logs" class="bottom-panel hidden" style="padding-top:10px">
+              <div id="logs-wrap" style="height:100%"></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" class="hidden">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
