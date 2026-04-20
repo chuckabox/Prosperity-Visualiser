@@ -1,62 +1,52 @@
-# 🌌 OpenProsperity Visualizer
+# Prosperity Visualizer
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Fast](https://img.shields.io/badge/Performance-Ultra--Fast-brightgreen)](https://github.com/lachy-dauth/prosperity-visualizer)
+A fast local dashboard for analyzing IMC Prosperity competition logs. It runs entirely in your browser and processes data locally to keep your strategies private.
 
-A high-performance, local-first dashboard for the IMC Prosperity algorithmic trading competition. Engineered for speed, privacy, and deep analytical insight.
+## Features
 
-![Preview](https://via.placeholder.com/1200x600/161625/e5e7eb?text=OpenProsperity+Visualizer+Preview)
+- Performance: Moves log parsing to background workers to prevent UI lag.
+- Privacy: No data uploads or tracking. All processing happens on your machine.
+- Comparisons: Compare multiple strategy runs side-by-side. Use Diff Mode to highlight performance changes from a baseline.
+- Timeline: Navigate through multiple competition days in one view.
+- Persistence: Save parsed results to IndexedDB to avoid re-parsing on reload.
 
-## ✨ Why OpenProsperity?
+## Tech Stack
 
-Designed for traders who need more than just a PnL graph. OpenProsperity is built from the ground up to handle massive log files and multi-strategy comparisons with zero latency.
+- Vanilla JavaScript (ES Modules)
+- Pub/Sub State Management
+- Web Workers for parsing
+- HTML5 Canvas for charts
+- Browser File API and IndexedDB
 
--   **🚀 Ultra-Performance**: Offloads heavy parsing to Web Workers and uses Canvas for buttery-smooth charting.
--   **🔒 Privacy First**: Your strategies never leave your machine. No uploads, no telemetry, no tracking.
--   **📈 Deep Comparison**: Compare 10+ variants side-by-side. Use **Diff Mode** to see exact variance from a baseline.
--   **📅 Multi-Day Ready**: Seamlessly navigate through multiple days of competition logs.
--   **💾 Local Persistence**: Opt-in to save your parsed data to browser storage for instant access on reload.
+## Setup
 
-## 🛠 Tech Stack
-
--   **Core**: Vanilla JavaScript (ES Modules)
--   **Architecture**: Pub/Sub Store + Web Workers
--   **Visuals**: High-Performance HTML5 Canvas
--   **Storage**: Browser File API + IndexedDB
-
-## 🏁 Quick Start
+You must use an HTTP server for Web Workers to function correctly.
 
 ```bash
 git clone https://github.com/lachy-dauth/prosperity-visualizer
 cd prosperity-visualizer
-
-# Serve with any HTTP server (required for Web Workers)
 python -m http.server 8080
 ```
 
-Open `http://localhost:8080` and drop your `.log` files.
+Visit `localhost:8080` and drop your .log files to start.
 
-## 🎹 Keyboard Shortcuts
+## Shortcuts
 
-| Key | Action |
-| --- | --- |
-| `Space` | Play / Pause |
-| `←` / `→` | Step one tick |
-| `Shift` + `←` / `→` | Jump 10 ticks |
-| `Esc` | Close Modals |
+| Key                  | Action        |
+| -------------------- | ------------- |
+| Space                | Play or pause |
+| Left / Right         | Move one tick |
+| Shift + Left / Right | Move 10 ticks |
+| Esc                  | Close modals  |
 
-## 📁 Project Structure
+## Project Structure
 
--   `app.js` — Application entry point and orchestrator.
--   `styles.css` — Modern, responsive UI styling.
--   `js/parser.js` — Intelligent log parser (multithreaded).
--   `js/chart.js` — custom Canvas-based line chart with tooltips.
--   `js/panels/` — Modular UI components.
+- `app.js`: Main application script.
+- `styles.css`: CSS for the dashboard.
+- `js/parser.js`: Multi-threaded parser logic.
+- `js/chart.js`: Custom Canvas charts for PnL and Price.
+- `js/panels/`: Components for different dashboard sections.
 
-## 🤝 Credits
+## Credits
 
-Massive inspiration from [jmerle's imc-prosperity-3-visualizer](https://github.com/jmerle/imc-prosperity-3-visualizer).
-
----
-
-*OpenProsperity is an independent fan tool and is not affiliated with IMC Trading.*
+Inspired by [jmerle's IMC visualizer](https://github.com/jmerle/imc-prosperity-3-visualizer).
