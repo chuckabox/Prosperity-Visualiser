@@ -4,7 +4,10 @@ export function initLogs(container) {
   container.innerHTML = `
     <div class="panel logs-panel">
       <div class="panel-header">
-        <span class="panel-title">Logs</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="panel-title">Logs</span>
+          <button id="logs-copy" class="btn-ghost" style="padding: 1px 6px;">Copy</button>
+        </div>
         <div class="log-tabs">
           <button class="log-tab active" data-tab="algo">Algorithm</button>
           <button class="log-tab" data-tab="trader">Trader Data</button>
@@ -16,6 +19,15 @@ export function initLogs(container) {
 
   const logContent = container.querySelector('#log-content');
   let activeTab = 'algo';
+
+  container.querySelector('#logs-copy').addEventListener('click', () => {
+    navigator.clipboard.writeText(logContent.textContent).then(() => {
+      const btn = container.querySelector('#logs-copy');
+      const oldText = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = oldText, 2000);
+    }).catch(console.error);
+  });
 
   container.querySelectorAll('.log-tab').forEach(btn => {
     btn.addEventListener('click', () => {
