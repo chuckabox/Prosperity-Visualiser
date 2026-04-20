@@ -31,11 +31,12 @@ export function lttb(data, threshold) {
     const aX = data[a].x, aY = data[a].y;
     let maxArea = -1, nextA = rangeStart;
 
+    const diffAX = aX - avgX;
+    const diffAY = aY - avgY;
+
     for (let j = rangeStart; j < rangeTo; j++) {
-      const area = Math.abs(
-        (aX - avgX) * (data[j].y - aY) -
-        (aX - data[j].x) * (avgY - aY)
-      ) * 0.5;
+      const dj = data[j];
+      const area = Math.abs(diffAX * (dj.y - aY) - (aX - dj.x) * diffAY);
       if (area > maxArea) { maxArea = area; nextA = j; }
     }
 
