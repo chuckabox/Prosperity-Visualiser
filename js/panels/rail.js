@@ -11,6 +11,13 @@ export function initRail(container) {
         <span class="rail-title">Strategies</span>
         <button class="btn-ghost" id="load-demo" aria-label="Load demo log">Demo</button>
       </div>
+      <div class="rail-samples">
+        <span class="rail-subtitle">Samples</span>
+        <div class="sample-btns">
+          <button class="btn-ghost sample-btn" data-url="data/364354.log">Log A</button>
+          <button class="btn-ghost sample-btn" data-url="data/364354.json">JSON B</button>
+        </div>
+      </div>
       <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Drop log files here">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -60,6 +67,27 @@ export function initRail(container) {
     } finally {
       store.setLoading(false);
     }
+  });
+
+  // Samples
+  container.querySelectorAll('.sample-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const url = btn.dataset.url;
+      const fileName = url.split('/').pop();
+      try {
+        store.setLoading(true);
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        const strategy = await parseLogFile(text, fileName);
+        store.addStrategy(strategy);
+        if (store.state.prefs.indexedDB) await saveStrategy(strategy);
+      } catch (e) {
+        alert(`Failed to load sample: ${e.message}`);
+      } finally {
+        store.setLoading(false);
+      }
+    });
   });
 
   // IDB toggle
