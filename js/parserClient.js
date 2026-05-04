@@ -20,6 +20,12 @@ function getWorker() {
   return _worker;
 }
 
+/**
+ * Parse a log file string using a background Web Worker
+ * @param {string} text - The log file content
+ * @param {string} fileName - Original name of the file
+ * @returns {Promise<Object>} - Parsed strategy data
+ */
 export function parseLogFile(text, fileName) {
   return new Promise((resolve, reject) => {
     const id = ++_reqId;

@@ -14,6 +14,10 @@ async function db() {
   });
 }
 
+/**
+ * Save a strategy object to IndexedDB
+ * @param {Object} strategy - The strategy to persist
+ */
 export async function saveStrategy(strategy) {
   const d = await db();
   return new Promise((resolve, reject) => {
@@ -24,6 +28,10 @@ export async function saveStrategy(strategy) {
   });
 }
 
+/**
+ * Load all saved strategies from IndexedDB
+ * @returns {Promise<Array>} - List of saved strategies
+ */
 export async function loadStrategies() {
   const d = await db();
   return new Promise((resolve, reject) => {
@@ -34,6 +42,10 @@ export async function loadStrategies() {
   });
 }
 
+/**
+ * Delete a strategy from IndexedDB by ID
+ * @param {string} id - The strategy ID to delete
+ */
 export async function deleteStrategy(id) {
   const d = await db();
   return new Promise((resolve, reject) => {

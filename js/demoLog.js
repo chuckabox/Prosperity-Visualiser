@@ -1,3 +1,7 @@
+/**
+ * Fetch the demo log file from the server
+ * @returns {Promise<string>} - The log file content
+ */
 export async function loadDemoLog() {
   const res = await fetch('./demo.log');
   if (!res.ok) throw new Error(`Failed to load demo log: ${res.status}`);

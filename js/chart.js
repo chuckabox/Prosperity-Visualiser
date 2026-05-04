@@ -16,6 +16,11 @@ function cssVar(name) {
 }
 
 export class LineChart {
+  /**
+   * Create a new custom Canvas line chart
+   * @param {HTMLCanvasElement} canvas - The canvas element to draw on
+   * @param {Object} [opts={}] - Chart options
+   */
   constructor(canvas, opts = {}) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
@@ -43,16 +48,28 @@ export class LineChart {
     this._resize();
   }
 
+  /**
+   * Update the data series to be displayed
+   * @param {Array} series - List of series objects {label, color, data}
+   */
   setSeries(series) {
     this.series = series;
     this.render();
   }
 
+  /**
+   * Update chart options
+   * @param {Object} opts - Options object to merge
+   */
   setOpts(opts) {
     Object.assign(this.opts, opts);
     this.render();
   }
 
+  /**
+   * Set the horizontal position of the vertical tick marker
+   * @param {number|null} x - X value (timestamp) for the marker
+   */
   setTickMarker(x) {
     this._tickMarker = x;
     this.render();
@@ -90,6 +107,9 @@ export class LineChart {
     this.render();
   }
 
+  /**
+   * Main draw loop for the chart
+   */
   render() {
     const { ctx, series, opts } = this;
     const w = this._w || this.canvas.clientWidth;
@@ -292,11 +312,18 @@ export class LineChart {
     }
   }
 
+  /**
+   * Clean up observers and DOM elements
+   */
   destroy() {
     this._ro.disconnect();
     this._tooltip.remove();
   }
 
+  /**
+   * Export the current chart view as a base64 PNG
+   * @returns {string} - Data URL
+   */
   toDataURL() {
     return this.canvas.toDataURL('image/png');
   }

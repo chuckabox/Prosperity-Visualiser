@@ -19,16 +19,31 @@ const _listeners = new Map();
 
 export const state = _state;
 
+/**
+ * Subscribe to state changes for a specific key
+ * @param {string} key - The state key to watch
+ * @param {Function} fn - Callback function
+ * @returns {Function} - Unsubscribe function
+ */
 export function subscribe(key, fn) {
   if (!_listeners.has(key)) _listeners.set(key, new Set());
   _listeners.get(key).add(fn);
   return () => _listeners.get(key)?.delete(fn);
 }
 
+/**
+ * Emit a state change event
+ * @param {string} key - The state key that changed
+ * @param {any} data - The new value
+ */
 export function emit(key, data) {
   _listeners.get(key)?.forEach(fn => fn(data));
 }
 
+/**
+ * Add a new strategy to the store
+ * @param {Object} strategy - The strategy object to add
+ */
 export function addStrategy(strategy) {
   if (_state.strategies.has(strategy.id)) return;
   _state.strategies.set(strategy.id, strategy);
@@ -41,6 +56,10 @@ export function addStrategy(strategy) {
   _recalcMaxTick();
 }
 
+/**
+ * Remove a strategy from the store by ID
+ * @param {string} id - The strategy ID to remove
+ */
 export function removeStrategy(id) {
   _state.strategies.delete(id);
   _state.activeIds.delete(id);
@@ -48,6 +67,9 @@ export function removeStrategy(id) {
   _recalcMaxTick();
 }
 
+/**
+ * Clear all strategies and reset playback state
+ */
 export function clearAll() {
   _state.strategies.clear();
   _state.activeIds.clear();
