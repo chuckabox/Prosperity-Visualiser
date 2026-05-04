@@ -1,11 +1,11 @@
-# Prosperity Visualizer
+# Prosperity Visualiser
 
 A fast local dashboard for analyzing IMC Prosperity competition logs. It runs entirely in your browser and processes data locally to keep your strategies private.
 
 ## Features
 
-- Performance: Moves log parsing to background workers to prevent UI lag.
-- Privacy: No data uploads or tracking. All processing happens on your machine.
+- High Performance: Moves log parsing to background workers to prevent UI lag.
+- Privacy & Security: No data uploads or tracking. All processing happens on your machine.
 - Comparisons: Compare multiple strategy runs side-by-side. Use Diff Mode to highlight performance changes from a baseline.
 - Timeline: Navigate through multiple competition days in one view.
 - Persistence: Save parsed results to IndexedDB to avoid re-parsing on reload.
@@ -26,11 +26,13 @@ You must use an HTTP server for Web Workers to function correctly.
 git clone https://github.com/lachy-dauth/prosperity-visualizer
 cd prosperity-visualizer
 python -m http.server 8080
+# OR
+npx serve .
 ```
 
 Visit `localhost:8080` and drop your .log files to start.
 
-## Shortcuts
+## Keyboard Shortcuts
 
 | Key                  | Action        |
 | -------------------- | ------------- |
@@ -50,3 +52,7 @@ Visit `localhost:8080` and drop your .log files to start.
 ## Credits
 
 Inspired by [jmerle's IMC visualizer](https://github.com/jmerle/imc-prosperity-3-visualizer).
+
+## License
+
+MIT License. See `LICENSE` for details.
