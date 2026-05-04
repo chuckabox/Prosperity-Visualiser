@@ -38,7 +38,7 @@ export function initTopBar(container) {
           <input type="checkbox" id="tb-diff" aria-label="Enable diff mode">
           <span>Diff</span>
         </label>
-        <button class="tb-btn" id="tb-mode" title="Toggle Simple/Advanced mode">Simple</button>
+        <button class="tb-btn" id="tb-mode" title="Switch UI Mode">Simple Mode</button>
         <button class="tb-btn" id="tb-theme" title="Toggle theme" aria-label="Toggle light/dark theme">&#9790;</button>
         <button class="tb-btn" id="tb-help" title="About / Specs" aria-label="Show help and about">?</button>
       </div>
@@ -118,11 +118,11 @@ export function initTopBar(container) {
     });
 
     store.subscribe('uiMode', m => {
-      modeBtn.textContent = m === 'simple' ? 'Advanced' : 'Simple';
+      modeBtn.textContent = m === 'simple' ? 'Advanced Mode' : 'Simple Mode';
     });
 
     // Initial state
-    modeBtn.textContent = store.state.uiMode === 'simple' ? 'Advanced' : 'Simple';
+    modeBtn.textContent = store.state.uiMode === 'simple' ? 'Advanced Mode' : 'Simple Mode';
     document.body.classList.toggle('mode-simple', store.state.uiMode === 'simple');
   }
 }

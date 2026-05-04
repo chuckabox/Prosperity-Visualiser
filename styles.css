@@ -255,6 +255,8 @@ html, body {
   transition: background 0.15s, border-color 0.15s;
 }
 .tb-btn:hover { background: var(--bg-hover); border-color: var(--accent); }
+#tb-mode { border-color: var(--accent); color: var(--accent); font-weight: 600; padding: 3px 10px; margin-right: 4px; }
+#tb-mode:hover { background: var(--accent); color: white; }
 
 .tb-select {
   background: var(--bg-tertiary); border: 1px solid var(--border);
