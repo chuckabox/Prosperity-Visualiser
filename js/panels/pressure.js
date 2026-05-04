@@ -1,6 +1,10 @@
 import * as store from '../store.js';
 import { getLimit } from '../positionLimits.js';
 
+/**
+ * Initialize the position pressure gauge
+ * @param {HTMLElement} container - The container element
+ */
 export function initPressure(container) {
   container.innerHTML = `
     <div class="panel">

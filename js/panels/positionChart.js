@@ -2,6 +2,10 @@ import * as store from '../store.js';
 import { LineChart } from '../chart.js';
 import { getLimit } from '../positionLimits.js';
 
+/**
+ * Initialize the position sizing chart
+ * @param {HTMLElement} container - The container element
+ */
 export function initPositionChart(container) {
   container.innerHTML = `
     <div class="chart-panel">

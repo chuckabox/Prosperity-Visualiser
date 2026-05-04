@@ -1,6 +1,10 @@
 import * as store from '../store.js';
 import { fmtPnl, fmtInt } from '../format.js';
 
+/**
+ * Initialize the KPI cards row
+ * @param {HTMLElement} container - The container element
+ */
 export function initKpi(container) {
   container.innerHTML = `<div class="kpi-row" id="kpi-inner"></div>`;
   const inner = container.querySelector('#kpi-inner');

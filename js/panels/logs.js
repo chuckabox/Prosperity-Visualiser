@@ -1,12 +1,16 @@
 import * as store from '../store.js';
 
+/**
+ * Initialize the algorithm and sandbox logs viewer
+ * @param {HTMLElement} container - The container element
+ */
 export function initLogs(container) {
   container.innerHTML = `
     <div class="panel logs-panel">
       <div class="panel-header">
         <div style="display:flex; align-items:center; gap:8px;">
           <span class="panel-title">Logs</span>
-          <button id="logs-copy" class="btn-ghost" style="padding: 1px 6px;">Copy</button>
+          <button id="logs-copy" class="btn-ghost" style="padding: 1px 6px;" aria-label="Copy logs to clipboard">Copy</button>
         </div>
         <div class="log-tabs">
           <button class="log-tab active" data-tab="algo">Algorithm</button>

@@ -2,12 +2,16 @@ import * as store from '../store.js';
 import { LineChart } from '../chart.js';
 import { exportPng } from '../exporters.js';
 
+/**
+ * Initialize the PnL performance chart
+ * @param {HTMLElement} container - The container element
+ */
 export function initPnlChart(container) {
   container.innerHTML = `
     <div class="chart-panel">
       <div class="chart-header">
         <span class="chart-title">PnL Performance</span>
-        <button class="btn-ghost" id="pnl-export">PNG</button>
+        <button class="btn-ghost" id="pnl-export" aria-label="Export PnL chart as PNG image">PNG</button>
       </div>
       <div class="chart-body">
         <canvas id="pnl-canvas"></canvas>

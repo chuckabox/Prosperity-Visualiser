@@ -16,19 +16,19 @@ import { loadStrategies } from './js/persistence.js';
 // Apply saved theme
 document.documentElement.setAttribute('data-theme', store.state.theme);
 
-// Init all panels
-initRail(document.getElementById('rail'));
-initTopBar(document.getElementById('top-bar'));
-initKpi(document.getElementById('kpi-row'));
-initPnlChart(document.getElementById('pnl-chart-wrap'));
-initPriceChart(document.getElementById('price-chart-wrap'));
-initPositionChart(document.getElementById('position-chart-wrap'));
-initOrderBook(document.getElementById('order-book-wrap'));
-initPressure(document.getElementById('pressure-wrap'));
-initOwnFills(document.getElementById('own-fills-wrap'));
-initLogs(document.getElementById('logs-wrap'));
-initSummary(document.getElementById('summary-wrap'));
-initAbout();
+// Initialize UI components and panels
+initRail(document.getElementById('rail'));           // Sidebar for strategy management
+initTopBar(document.getElementById('top-bar'));       // Playback controls and global settings
+initKpi(document.getElementById('kpi-row'));          // Key performance indicators
+initPnlChart(document.getElementById('pnl-chart-wrap')); // Profit & Loss visualization
+initPriceChart(document.getElementById('price-chart-wrap')); // Price action visualization
+initPositionChart(document.getElementById('position-chart-wrap')); // Position sizing visualization
+initOrderBook(document.getElementById('order-book-wrap')); // L2 Order Book display
+initPressure(document.getElementById('pressure-wrap')); // Buy/Sell pressure gauge
+initOwnFills(document.getElementById('own-fills-wrap')); // Execution history
+initLogs(document.getElementById('logs-wrap'));       // Strategy log output
+initSummary(document.getElementById('summary-wrap')); // Trade summary statistics
+initAbout();                                          // About modal and credits
 
 // Loading overlay
 const loadingEl = document.getElementById('loading-overlay');

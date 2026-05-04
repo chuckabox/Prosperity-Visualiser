@@ -1,5 +1,8 @@
 let _open = () => {};
 
+/**
+ * Initialize the About modal and its event listeners
+ */
 export function initAbout() {
   const modal = document.createElement('div');
   modal.className = 'modal-overlay hidden';
@@ -47,6 +50,9 @@ export function initAbout() {
   _open = () => modal.classList.remove('hidden');
 }
 
+/**
+ * Open the About modal
+ */
 export function openAbout() {
   _open();
 }

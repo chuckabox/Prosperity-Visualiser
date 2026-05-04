@@ -1,5 +1,9 @@
 import * as store from '../store.js';
 
+/**
+ * Initialize the execution history table
+ * @param {HTMLElement} container - The container element
+ */
 export function initOwnFills(container) {
   container.innerHTML = `
     <div class="panel">

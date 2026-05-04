@@ -1,5 +1,9 @@
 import * as store from '../store.js';
 
+/**
+ * Initialize the L2 order book visualization
+ * @param {HTMLElement} container - The container element
+ */
 export function initOrderBook(container) {
   container.innerHTML = `
     <div class="panel">

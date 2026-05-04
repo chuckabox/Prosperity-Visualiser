@@ -2,12 +2,16 @@ import * as store from '../store.js';
 import { fmtPnl } from '../format.js';
 import { exportCsv } from '../exporters.js';
 
+/**
+ * Initialize the strategy comparison summary table
+ * @param {HTMLElement} container - The container element
+ */
 export function initSummary(container) {
   container.innerHTML = `
     <div class="panel">
       <div class="panel-header">
         <span class="panel-title">Comparison Summary</span>
-        <button class="btn-ghost" id="summary-export">CSV</button>
+        <button class="btn-ghost" id="summary-export" aria-label="Export comparison summary as CSV">CSV</button>
       </div>
       <div id="summary-content" class="summary-content">
         <table class="summary-table">

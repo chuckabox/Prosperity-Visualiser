@@ -4,20 +4,24 @@ import { openAbout } from './about.js';
 let _raf = null;
 let _lastTime = null;
 
+/**
+ * Initialize the top playback and controls bar
+ * @param {HTMLElement} container - The container element
+ */
 export function initTopBar(container) {
   container.innerHTML = `
     <div class="top-bar">
       <div class="top-bar-left">
-        <button class="tb-btn" id="tb-play" title="Play/Pause (Space)">&#9654;</button>
-        <button class="tb-btn" id="tb-prev" title="Prev tick (←)">&#8592;</button>
-        <button class="tb-btn" id="tb-next" title="Next tick (→)">&#8594;</button>
-        <input type="range" id="tb-scrubber" min="0" max="0" value="0" class="scrubber">
+        <button class="tb-btn" id="tb-play" title="Play/Pause (Space)" aria-label="Play or pause playback">&#9654;</button>
+        <button class="tb-btn" id="tb-prev" title="Prev tick (←)" aria-label="Previous tick">&#8592;</button>
+        <button class="tb-btn" id="tb-next" title="Next tick (→)" aria-label="Next tick">&#8594;</button>
+        <input type="range" id="tb-scrubber" min="0" max="0" value="0" class="scrubber" aria-label="Seek to tick">
         <span class="tb-tick-label" id="tb-tick-label">0 / 0</span>
       </div>
       <div class="top-bar-center">
-        <select id="tb-day" class="tb-select" title="Filter by day"></select>
-        <select id="tb-product" class="tb-select" title="Select product"></select>
-        <select id="tb-speed" class="tb-select">
+        <select id="tb-day" class="tb-select" title="Filter by day" aria-label="Select competition day"></select>
+        <select id="tb-product" class="tb-select" title="Select product" aria-label="Select trading product"></select>
+        <select id="tb-speed" class="tb-select" aria-label="Playback speed">
           <option value="1">1×</option>
           <option value="5">5×</option>
           <option value="10">10×</option>
@@ -27,15 +31,15 @@ export function initTopBar(container) {
       </div>
       <div class="top-bar-right">
         <label class="toggle-row" title="Normalize X axis">
-          <input type="checkbox" id="tb-norm-x">
+          <input type="checkbox" id="tb-norm-x" aria-label="Normalize X axis">
           <span>Norm-X</span>
         </label>
         <label class="toggle-row" title="Diff mode: variant − baseline">
-          <input type="checkbox" id="tb-diff">
+          <input type="checkbox" id="tb-diff" aria-label="Enable diff mode">
           <span>Diff</span>
         </label>
-        <button class="tb-btn" id="tb-theme" title="Toggle theme">&#9790;</button>
-        <button class="tb-btn" id="tb-help" title="About / Specs">?</button>
+        <button class="tb-btn" id="tb-theme" title="Toggle theme" aria-label="Toggle light/dark theme">&#9790;</button>
+        <button class="tb-btn" id="tb-help" title="About / Specs" aria-label="Show help and about">?</button>
       </div>
     </div>`;
 

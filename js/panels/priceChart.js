@@ -1,6 +1,10 @@
 import * as store from '../store.js';
 import { LineChart } from '../chart.js';
 
+/**
+ * Initialize the price and liquidity chart
+ * @param {HTMLElement} container - The container element
+ */
 export function initPriceChart(container) {
   container.innerHTML = `
     <div class="chart-panel">
