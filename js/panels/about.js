@@ -9,11 +9,11 @@ export function initAbout() {
   modal.innerHTML = `
     <div class="modal">
       <div class="modal-header">
-        <h2>OpenProsperity Visualizer</h2>
+        <h2>Prosperity Visualiser</h2>
         <button class="modal-close">✕</button>
       </div>
       <div class="modal-body">
-        <p><strong>OpenProsperity Visualizer v1.2.0</strong></p>
+        <p><strong>Prosperity Visualiser v1.2.0</strong></p>
         <p>A specialized tool for analyzing trading logs from the IMC Prosperity competition. Designed for speed, privacy, and deep data inspection.</p>
         
         <h3>Key Features</h3>

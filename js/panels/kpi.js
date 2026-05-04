@@ -31,7 +31,7 @@ export function initKpi(container) {
       const spread = bestBid && bestAsk ? bestAsk - bestBid : 0;
 
       return `
-        <div class="kpi-card" style="border-top:3px solid ${s.color}">
+        <div class="kpi-card">
           <div class="kpi-name">${s.name}</div>
           <div class="kpi-grid">
             <div class="kpi-item">

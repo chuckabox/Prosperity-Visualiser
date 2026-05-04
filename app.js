@@ -5,7 +5,7 @@ import { initPnlChart } from './js/panels/pnlChart.js';
 import { initPriceChart } from './js/panels/priceChart.js';
 import { initPositionChart } from './js/panels/positionChart.js';
 import { initOrderBook } from './js/panels/orderBook.js';
-import { initPressure } from './js/panels/pressure.js';
+
 import { initOwnFills } from './js/panels/ownFills.js';
 import { initLogs } from './js/panels/logs.js';
 import { initSummary } from './js/panels/summary.js';
@@ -24,7 +24,7 @@ initPnlChart(document.getElementById('pnl-chart-wrap')); // Profit & Loss visual
 initPriceChart(document.getElementById('price-chart-wrap')); // Price action visualization
 initPositionChart(document.getElementById('position-chart-wrap')); // Position sizing visualization
 initOrderBook(document.getElementById('order-book-wrap')); // L2 Order Book display
-initPressure(document.getElementById('pressure-wrap')); // Buy/Sell pressure gauge
+
 initOwnFills(document.getElementById('own-fills-wrap')); // Execution history
 initLogs(document.getElementById('logs-wrap'));       // Strategy log output
 initSummary(document.getElementById('summary-wrap')); // Trade summary statistics

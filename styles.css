@@ -459,7 +459,7 @@ html, body {
 
 .bottom-inner {
   display: grid;
-  grid-template-columns: 220px 200px 1fr;
+  grid-template-columns: 220px 1fr;
   gap: 10px;
   height: 100%;
   padding: 10px 0 0;
@@ -506,12 +506,7 @@ html, body {
 .ob-row.ask .ob-price { color: var(--neg); }
 .ob-row.bid .ob-price { color: var(--pos); }
 
-/* ===== Pressure ===== */
-.pressure-content { overflow-y: auto; flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8px; gap: 8px; }
-.pressure-gauge { width: 100%; text-align: center; }
-.gauge-name { font-size: 11px; font-weight: 600; margin-bottom: 4px; }
-.gauge-svg { width: 100%; max-width: 140px; }
-.gauge-label { font-size: 12px; font-weight: 600; margin-top: 2px; }
+
 
 /* ===== Fills ===== */
 .fills-content { overflow: auto; flex: 1; }

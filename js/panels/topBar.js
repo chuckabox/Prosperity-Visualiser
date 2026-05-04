@@ -39,7 +39,7 @@ export function initTopBar(container) {
           <span>Diff</span>
         </label>
         <button class="tb-btn" id="tb-mode" title="Switch UI Mode">Simple Mode</button>
-        <button class="tb-btn" id="tb-theme" title="Toggle theme" aria-label="Toggle light/dark theme">&#9790;</button>
+
         <button class="tb-btn" id="tb-help" title="About / Specs" aria-label="Show help and about">?</button>
       </div>
     </div>`;
@@ -52,7 +52,7 @@ export function initTopBar(container) {
   const speedSel = container.querySelector('#tb-speed');
   const normX = container.querySelector('#tb-norm-x');
   const diffCk = container.querySelector('#tb-diff');
-  const themeBtn = container.querySelector('#tb-theme');
+
   const helpBtn = container.querySelector('#tb-help');
 
   function updateScrubber() {
@@ -92,9 +92,7 @@ export function initTopBar(container) {
   speedSel.addEventListener('change', () => store.setSpeed(+speedSel.value));
   normX.addEventListener('change', () => store.setPref('normalizeX', normX.checked));
   diffCk.addEventListener('change', () => store.setPref('diffMode', diffCk.checked));
-  themeBtn.addEventListener('click', () => {
-    store.setTheme(store.state.theme === 'dark' ? 'light' : 'dark');
-  });
+
   helpBtn.addEventListener('click', () => openAbout());
 
   document.addEventListener('keydown', (e) => {
