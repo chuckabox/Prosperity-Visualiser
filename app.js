@@ -38,12 +38,27 @@ store.subscribe('loading', v => {
 
 // Restore IndexedDB strategies if pref was saved
 const savedIdb = localStorage.getItem('op-idb') === 'true';
-if (savedIdb) {
-  store.setPref('indexedDB', true);
-  loadStrategies().then(strats => {
-    strats.forEach(s => store.addStrategy(s));
-  }).catch(console.error);
-}
+const restorePromise = savedIdb 
+  ? loadStrategies().then(strats => {
+      strats.forEach(s => store.addStrategy(s));
+      return strats.length;
+    })
+  : Promise.resolve(0);
+
+// Auto-load demo log if nothing else is loaded
+restorePromise.then(count => {
+  if (count === 0 && store.state.strategies.size === 0) {
+    import('./js/demoLog.js').then(({ loadDemoLog }) => {
+      import('./js/parserClient.js').then(({ parseLogFile }) => {
+        loadDemoLog().then(text => {
+          parseLogFile(text, 'demo.log').then(strategy => {
+            store.addStrategy(strategy);
+          });
+        }).catch(console.warn);
+      });
+    });
+  }
+});
 
 // Bottom panel tab switching
 document.querySelectorAll('[data-panel]').forEach(btn => {
