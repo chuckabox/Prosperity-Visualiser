@@ -7,12 +7,21 @@ export function parseLog(text, fileName) {
   let tradeSection = '';
 
   const trimmed = text.trim();
-  if (trimmed.startsWith('{')) {
+  if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
     try {
       const obj = JSON.parse(trimmed);
-      activitySection = obj.activitiesLog ?? obj.activityLog ?? '';
-      sandboxSection = obj.logs ?? obj.sandboxLog ?? obj.sandboxLogs ?? '';
-      tradeSection = obj.tradeHistory ?? obj.trades ?? '';
+      if (Array.isArray(obj)) {
+        // If it's just an array, it might be the logs or activities
+        if (obj[0]?.timestamp !== undefined && (obj[0]?.sandboxLog !== undefined || obj[0]?.lambdaLog !== undefined)) {
+          sandboxSection = obj;
+        } else {
+          activitySection = obj;
+        }
+      } else {
+        activitySection = obj.activitiesLog ?? obj.activityLog ?? '';
+        sandboxSection = obj.logs ?? obj.sandboxLog ?? obj.sandboxLogs ?? '';
+        tradeSection = obj.tradeHistory ?? obj.trades ?? '';
+      }
     } catch (e) {
       console.warn('Failed to parse log as JSON', e);
     }
