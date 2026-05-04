@@ -34,10 +34,11 @@ export function initTopBar(container) {
           <input type="checkbox" id="tb-norm-x" aria-label="Normalize X axis">
           <span>Norm-X</span>
         </label>
-        <label class="toggle-row" title="Diff mode: variant − baseline">
+        <label class="toggle-row" title="Enable diff mode">
           <input type="checkbox" id="tb-diff" aria-label="Enable diff mode">
           <span>Diff</span>
         </label>
+        <button class="tb-btn" id="tb-mode" title="Toggle Simple/Advanced mode">Simple</button>
         <button class="tb-btn" id="tb-theme" title="Toggle theme" aria-label="Toggle light/dark theme">&#9790;</button>
         <button class="tb-btn" id="tb-help" title="About / Specs" aria-label="Show help and about">?</button>
       </div>
@@ -107,6 +108,23 @@ export function initTopBar(container) {
   updateScrubber();
   updateProducts();
   updateDays();
+
+  // Mode Toggle
+  const modeBtn = container.querySelector('#tb-mode');
+  if (modeBtn) {
+    modeBtn.addEventListener('click', () => {
+      const next = store.state.uiMode === 'simple' ? 'advanced' : 'simple';
+      store.setUiMode(next);
+    });
+
+    store.subscribe('uiMode', m => {
+      modeBtn.textContent = m === 'simple' ? 'Advanced' : 'Simple';
+    });
+
+    // Initial state
+    modeBtn.textContent = store.state.uiMode === 'simple' ? 'Advanced' : 'Simple';
+    document.body.classList.toggle('mode-simple', store.state.uiMode === 'simple');
+  }
 }
 
 function togglePlay() {

@@ -528,3 +528,27 @@ kbd { background: var(--bg-tertiary); border: 1px solid var(--border); border-ra
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+ 
+ 
+
+/* ===== Simple Mode ===== */
+.mode-simple #rail { display: none; }
+.mode-simple .bottom-area { display: none; }
+.mode-simple .charts-row.position-row { display: none; }
+.mode-simple .top-bar-center { display: none; }
+.mode-simple #tb-scrubber { max-width: 600px; }
+.mode-simple .top-bar-right .toggle-row { display: none; }
+.mode-simple .top-bar-right #tb-help { display: none; }
+.mode-simple #content { padding: 20px; }
+.mode-simple .charts-row { grid-template-columns: 1fr; height: auto; gap: 20px; }
+.mode-simple .chart-panel { height: 400px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .charts-row { grid-template-columns: 1fr; }
+  .charts-row.position-row { height: 300px; }
+}
+@media (max-width: 768px) {
+  #rail { display: none; }
+  .top-bar-center { display: none; }
+}

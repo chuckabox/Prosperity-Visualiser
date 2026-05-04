@@ -13,6 +13,7 @@ const _state = {
   },
   loading: false,
   panel: 'pnl', // active bottom panel tab
+  uiMode: localStorage.getItem('op-ui-mode') || 'advanced',
 };
 
 const _listeners = new Map();
@@ -136,6 +137,13 @@ export function setLoading(v) {
 export function setPanel(p) {
   _state.panel = p;
   emit('panel', p);
+}
+
+export function setUiMode(m) {
+  _state.uiMode = m;
+  localStorage.setItem('op-ui-mode', m);
+  document.body.classList.toggle('mode-simple', m === 'simple');
+  emit('uiMode', m);
 }
 
 function _recalcMaxTick() {
