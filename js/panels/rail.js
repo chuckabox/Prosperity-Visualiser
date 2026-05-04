@@ -9,13 +9,13 @@ export function initRail(container) {
     <div class="rail">
       <div class="rail-header">
         <span class="rail-title">Strategies</span>
-        <button class="btn-ghost" id="load-demo" aria-label="Load demo log">Demo</button>
+        <button class="btn-ghost" id="load-demo" aria-label="Load Peter_V4">Peter_V4</button>
       </div>
       <div class="rail-samples">
         <span class="rail-subtitle">Samples</span>
-        <div class="sample-btns">
-          <button class="btn-ghost sample-btn" data-url="data/364354.log">Log A</button>
-          <button class="btn-ghost sample-btn" data-url="data/364354.json">JSON B</button>
+        <div class="sample-list">
+          <div class="sample-item" data-url="data/364354.log">Log A</div>
+          <div class="sample-item" data-url="data/364354.json">JSON B</div>
         </div>
       </div>
       <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Drop log files here">
@@ -30,11 +30,7 @@ export function initRail(container) {
       </div>
       <div id="strategy-list" class="strategy-list"></div>
       <div class="rail-footer">
-        <label class="toggle-row" title="Save to IndexedDB">
-          <input type="checkbox" id="idb-toggle" aria-label="Persist strategies to local database">
-          <span>Persist</span>
-        </label>
-        <button class="btn-ghost" id="clear-all" style="color:var(--neg)" aria-label="Clear all loaded strategies">Clear All</button>
+        <button class="btn-ghost" id="clear-all" style="color:var(--neg);width:100%" aria-label="Clear all loaded strategies">Clear All</button>
       </div>
     </div>`;
 
@@ -54,25 +50,25 @@ export function initRail(container) {
   dropZone.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') fileInput.click(); });
   fileInput.addEventListener('change', () => { loadFiles([...fileInput.files]); fileInput.value = ''; });
 
-  // Demo button
+  // Peter_V4 (Demo) button
   container.querySelector('#load-demo').addEventListener('click', async () => {
     try {
       store.setLoading(true);
       const text = await loadDemoLog();
-      const strategy = await parseLogFile(text, 'demo.log');
+      const strategy = await parseLogFile(text, 'Peter_V4.log');
       store.addStrategy(strategy);
       if (store.state.prefs.indexedDB) await saveStrategy(strategy);
     } catch (e) {
-      alert(`Failed to load demo: ${e.message}`);
+      alert(`Failed to load Peter_V4: ${e.message}`);
     } finally {
       store.setLoading(false);
     }
   });
 
   // Samples
-  container.querySelectorAll('.sample-btn').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const url = btn.dataset.url;
+  container.querySelectorAll('.sample-item').forEach(item => {
+    item.addEventListener('click', async () => {
+      const url = item.dataset.url;
       const fileName = url.split('/').pop();
       try {
         store.setLoading(true);
@@ -90,10 +86,7 @@ export function initRail(container) {
     });
   });
 
-  // IDB toggle
-  const idbToggle = container.querySelector('#idb-toggle');
-  idbToggle.checked = store.state.prefs.indexedDB;
-  idbToggle.addEventListener('change', () => store.setPref('indexedDB', idbToggle.checked));
+
 
   // Render strategy list
   function renderList() {

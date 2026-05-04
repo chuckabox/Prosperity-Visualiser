@@ -51,7 +51,7 @@ restorePromise.then(count => {
     import('./js/demoLog.js').then(({ loadDemoLog }) => {
       import('./js/parserClient.js').then(({ parseLogFile }) => {
         loadDemoLog().then(text => {
-          parseLogFile(text, 'demo.log').then(strategy => {
+          parseLogFile(text, 'Peter_V4.log').then(strategy => {
             store.addStrategy(strategy);
           });
         }).catch(console.warn);
